@@ -1,0 +1,125 @@
+{%- extends "basic/layout.html" %}
+{%- set show_sphinx = false %}
+{%- block htmltitle %}
+<title>337开发者文档中心</title>
+{%- endblock %}
+{%- block extrahead %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://337.eleximg.com/337/v3static/lib/semantic/css/semantic.css?v=04161152">
+<link rel="stylesheet" href="http://337.eleximg.com/337/v3static/css/apps/style.css?v=04161852">
+<style>
+  .main{
+    border: 1px solid;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    background: #fff;
+  }
+  .body{
+    margin-left:20px;
+
+  }
+  .maindoc{
+    margin-right:20px;
+  }
+  pre {
+    font-family: 'Consolas', 'Deja Vu Sans Mono',
+                 'Bitstream Vera Sans Mono', monospace;
+    font-size: 0.95em;
+    letter-spacing: 0.015em;
+    line-height: 120%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+  }
+  .fixed_elem{
+    position: fixed !important;
+    bottom:100px;
+  }
+  .fixed_elem_no{
+
+  }
+
+</style>
+{% endblock %}
+{%- block header %}
+    <div class="ui fixed inverted main menu" style="z-index: 9999">
+	    	<div class="item">
+	        	<strong> <a href="{{ pathto(master_doc) }}">337开发者文档中心</a></strong>
+	    	</div>
+    	</div>
+{% endblock %}
+{%- block relbar1 %}
+{% endblock %}
+{%- block content %}
+<div class="container">
+  <main class="ui grid">
+    <aside class="four wide column">
+  {%- block sidebar1 %}
+  {%- include "sidebars.html" %}
+  {% endblock %}
+    </aside>
+    <section class="twelve wide column">
+    <div class="document main">
+  {%- block document %}
+      <div class="documentwrapper maindoc">
+      {%- if render_sidebar %}
+        <div class="bodywrapper">
+      {%- endif %}
+          <div class="body">
+            {% block body %} {% endblock %}
+          </div>
+      {%- if render_sidebar %}
+        </div>
+      {%- endif %}
+      </div>
+  {%- endblock %}
+</section>
+  </main>
+</div>
+{%- endblock %}
+{%- block relbar2 %}
+{% endblock %}
+{%- block footer %}
+    <footer style="height: 100px;">
+		<div class="ui divider"></div>
+		<div class="ui divided horizontal footer link list"   style="text-align: center;display: block;">
+		<div class="item">
+			<strong> &copy; 2012 Elex  </strong>
+		</div>
+		</div>
+		</footer>
+    <script src="http://337.eleximg.com/337/v3static/lib/semantic/javascript/semantic.min.js?v=04161150"></script>
+
+    <script type="text/javascript">
+    var sidetop = $("#sidebar").offset().top;
+    var sideh = $("#sidebar").height();
+    var viewheight = $(window).height();
+    var sidepos = sidetop+sideh;
+    var thebottpm = viewheight-sidepos;
+    var scrollpoint = 100-thebottpm;
+    if(thebottpm > 100){
+      $("#sidebar").css("position","fixed");
+    }
+    window.onscroll = function(){
+      var scroll = $(window).scrollTop();
+
+      // console.debug("scroll:"+scroll);
+      // console.debug("sidetop:"+sidetop);
+      // console.debug("sideh:"+sideh);
+      // console.debug("viewh:"+viewheight);
+      // console.debug("thebottpm:"+thebottpm);
+
+      var sidebottom = viewheight-sidepos+scroll;
+      // console.debug("bottom"+sidebottom);
+      if(thebottpm < 100){
+        if(sidebottom >= 100 && scrollpoint <= scroll){
+          $("#sidebar").css("position","fixed");
+          $("#sidebar").css("bottom",100);
+        }else{
+          $("#sidebar").css("position","");
+          scrollpoint = 0;
+          thebottpm = 0;
+        }
+      }
+    }
+    </script>
+{%- endblock %}
