@@ -192,7 +192,7 @@ Verifications
 
 337.com payment verify service url：https://pay.337.com/payelex/api/callback/verify.php
 
-Public Key (.ca file, php may need this to work work properly),click to download：http://doc.xingcloud.com/download/attachments/4195503/verisign\_ca.crt?version=1&modificationDate=1327048502000
+Public Key (.ca file, php may need this to work work properly),click to download：http://elexpublish.googlecode.com/files/verisign_ca.crt
 
 Request Method：POST/GET
 
